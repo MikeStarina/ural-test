@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { SkuSearch, BrandSection, clearSelectedBrand, setSku, useSelectedBrand } from '@/features/find-brands'
+import { SkuSearch, BrandSection, clearSelectedBrand, useSelectedBrand } from '@/features/find-brands'
 import { OfferSection } from '@/features/find-offers'
 import styles from './MainPage.module.css'
 

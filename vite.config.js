@@ -14,4 +14,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      '/hsprice': {
+        target: 'http://api.favorit-parts.ru',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/hsprice/, '/hs/hsprice/'),
+      },
+    },
+  },
 })

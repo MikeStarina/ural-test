@@ -1,19 +1,13 @@
-# React + Vite
+Тестовое задани для Юрал / Михаил Старина
+Посмотреть можно тут: https://ural-test-five.vercel.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## DISCLAIMERS
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Из того как я понял задание - не использовать НИКАКИХ других библиотек кроме указанных,
+поэтому многое осталось за скобками в тч в плане DX
+- Redux с тулкитом в новом стиле (я решил что так можно)
+- RTK стоит но я не стал использовать его для запросов (хотя это бы сильно помогло)
+- Сам проект разложил по FSD - там можно было ограничиться только pages и shared, но я чуть подразбил для наглядности
+- Виртуализацию для списков и карточек не делал - вместо это просто чтоблы обозначить использовал content-visibility: auto
+- Задание выполнено в стилистике главного портала - чуть поправил фоновый цвет чтобы глазам было проще
+- Остальные комментарии в коде

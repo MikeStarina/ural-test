@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/hsprice",
+      "destination": "http://api.favorit-parts.ru/hs/hsprice/"
+    }
+  ]
+}
