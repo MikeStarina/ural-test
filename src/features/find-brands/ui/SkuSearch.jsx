@@ -1,45 +1,64 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import {
   MIN_SKU_LENGTH,
-  clearSelectedBrand,
   loadBrands,
   setSku,
   useSku,
 } from '../model/brands'
 import styles from './SkuSearch.module.css'
 
-const getFormStatusText = (query, canSearch) => {
-  if (query?.length > 0 && !canSearch) {
+const SEARCH_DELAY = 300
+
+function getFormStatusText(query, canSearch) {
+  if (query.length > 0 && !canSearch) {
     return `Минимум ${MIN_SKU_LENGTH} символа.`
   }
-  return 'Поиск по кнопке или клавише Enter.'
+  return ''
 }
 
 export function SkuSearch() {
   const dispatch = useDispatch()
   const sku = useSku()
   const requestAbort = useRef(null)
+  const timer = useRef(null)
   const query = sku.trim()
   const canSearch = query.length >= MIN_SKU_LENGTH
+  const statusText = getFormStatusText(query, canSearch)
+
+  // TODO: write something like useDebounce hook here
+  useEffect(function EF_loadBrands() {
+    const nextQuery = sku.trim()
+    if (nextQuery.length < MIN_SKU_LENGTH) {
+      clearTimeout(timer.current)
+      requestAbort.current?.abort()
+      return
+    }
+
+    timer.current = setTimeout(() => {
+      requestAbort.current?.abort()
+      requestAbort.current = dispatch(loadBrands(nextQuery))
+    }, SEARCH_DELAY)
+
+    return () => clearTimeout(timer.current)
+  }, [sku, dispatch])
 
   function onChange(event) {
     dispatch(setSku(event.target.value))
   }
-  // TODO: to add proper form validation
+
   function onSubmit(event) {
     event.preventDefault()
     if (!canSearch) return
 
+    clearTimeout(timer.current)
     requestAbort.current?.abort()
-    dispatch(clearSelectedBrand())
     requestAbort.current = dispatch(loadBrands(query))
   }
 
   return (
     <form className={styles.search} role="search" onSubmit={onSubmit}>
       <label htmlFor="sku" className={styles.search__label}>Артикул</label>
-      <div className={styles.search__row}>
         <input
           id="sku"
           className={styles.search__field}
@@ -52,22 +71,8 @@ export function SkuSearch() {
           enterKeyHint="search"
           onChange={onChange}
         />
-        {/* TODO: link "ready" animation w sku length */}
-        <button
-          className={
-            canSearch ?
-              // DISCUSS: here we need something to improve DX like "classnames"
-              `${styles.search__button} ${styles.search__button_ready}`
-              : styles.search__button
-          }
-          type="submit"
-          disabled={!canSearch}
-        >
-          Найти
-        </button>
-      </div>
       <div className={styles.search__statusArea}>
-        <span className={styles.search__status}>{getFormStatusText(query, canSearch)}</span>
+        {statusText ? <span className={styles.search__status}>{statusText}</span> : null}
       </div>
     </form>
   )

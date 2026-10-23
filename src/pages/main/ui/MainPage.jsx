@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { SkuSearch, BrandSection, clearSelectedBrand, useSelectedBrand } from '@/features/find-brands'
+import { SkuSearch, BrandSection, clearSelectedBrand, setSku, useSelectedBrand } from '@/features/find-brands'
 import { OfferSection } from '@/features/find-offers'
 import styles from './MainPage.module.css'
 
@@ -14,7 +14,8 @@ export function MainPage() {
       {/* TODO: to make the header a standalone component */}
       <header className={styles.header}>
         <div className={styles.header__logoWrapper}>
-          <a href="/">
+          {/* Probably here should be Link component from react-router or something like that so this is just a plug for now*/}
+          <a href="/" aria-label="Проценка, на главную">
             <Logo />
           </a>
           <span className={styles.header__separator} role="separator" aria-hidden="true"></span>
@@ -34,7 +35,7 @@ export function MainPage() {
         >
           <span aria-hidden="true">?</span>
           <span id="header-hint" role="tooltip" className={styles.header__tooltip}>
-            Введите артикул и нажмите «Найти». Выберите бренд, чтобы открыть аналоги и складские предложения.
+            Введите артикул. Выберите бренд, чтобы открыть аналоги и складские предложения.
           </span>
         </button>
       </header>
@@ -52,7 +53,7 @@ const Logo = () => {
   // svg inlined for the dark theme in the future
   // TODO: move it somewhere when necessary
   return (
-    <svg width="148" height="70" fill="none" className={styles.logo}>
+    <svg width="148" height="70" fill="none" className={styles.logo} aria-hidden="true">
       <path fill="currentColor" d="M28.2435 65.0666h-4.3607V44.7153h18.113v.872H28.2435v9.3029H36.82l-.5808.8727h-7.9957z" />
       <path fill="currentColor" d="M28.3972 65.0666H27.322l14.2756-20.3513h1.0751l-7.123 10.1749h7.7046V44.7153h4.3606v20.3513h-4.3606v-9.3028h-8.3158zM47.615 44.7163h5.0006l14.3628 20.3513h-5.0007zm21.1065 0v20.3513h-.872V44.7163zm35.6795 0h4.361v20.3513h-4.361z" />
       <path fill="currentColor" d="M118.274 65.0666h-4.361V45.5873h-9.391v-.872h23.055v.872h-9.304v19.4793zm-36.455-.8259c-3.0182-.018-5.2343-.8291-6.6467-2.4341-1.4124-1.6032-2.1091-3.909-2.0902-6.9164 0-1.5029.1735-2.8323.5232-3.9872q.522-1.7327 1.5958-2.9285c.7165-.7979 1.6206-1.4034 2.7138-1.8147 1.0932-.4129 2.3946-.6186 3.9041-.6186h.0008v-.8259h-.0008c-.9312 0-1.9011.065-2.9104.1925a16.5 16.5 0 0 0-2.9696.6606c-.9699.3126-1.892.7198-2.7648 1.224-.8728.5051-1.6395 1.1327-2.2984 1.883-.6597.7518-1.1845 1.646-1.572 2.6808-.3882 1.0365-.5824 2.2235-.5824 3.5619q0 2.0076.5824 3.534c.3883 1.0175.9123 1.9018 1.572 2.6545.6589.7519 1.4256 1.3845 2.2984 1.8969a13.15 13.15 0 0 0 2.7648 1.2241 17.3 17.3 0 0 0 2.9696.6457c1.0093.1284 1.9792.1933 2.9104.1933h.0008v-.8259z" />
