@@ -1,0 +1,39 @@
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 14px 0;
+  color: var(--muted);
+  background: var(--surface);
+}
+
+.status_error {
+  color: var(--danger);
+  background: var(--danger-bg);
+  padding: 14px 16px;
+}
+
+.status_empty {
+  color: var(--muted);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}

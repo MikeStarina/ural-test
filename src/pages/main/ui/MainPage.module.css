@@ -1,0 +1,120 @@
+.page {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  padding: 100px 20px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  @media (max-width: 720px) {
+    padding-top: 20px;
+  }
+}
+
+/* HEADER */
+.header {
+  color: var(--accent);
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.header__logoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__separator {
+  align-self: stretch;
+  width: 1px;
+  background: var(--line);
+}
+
+.header__titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap:8px;
+  max-width: 250px;
+}
+
+.header__title {
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+
+  @media (max-width: 720px) {
+      font-size: 36px;
+  }
+}
+
+.header__subtitle {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.header__info {
+  anchor-name: --header-info;
+  position: relative;
+  font-size: 12px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  width: 30px;
+  aspect-ratio: 1/1;
+  flex: 0 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__tooltip {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: min(280px, calc(100vw - 40px));
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
+  box-shadow: var(--shadow);
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+
+  @supports (anchor-name: --header-info) {
+    position: fixed;
+    position-anchor: --header-info;
+    position-area: bottom span-right;
+    top: auto;
+    right: auto;
+    margin-top: 10px;
+    margin-right: 20px;
+    position-try-fallbacks: flip-block;
+  }
+}
+
+.header__info:hover .header__tooltip,
+.header__info:focus-visible .header__tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* LOGO */
+.logo {
+  color: var(--accent);
+  flex: 0 0 auto;
+}
